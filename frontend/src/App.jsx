@@ -6,13 +6,14 @@ import Home from "./components/Home";
 import Profile from "./components/Profile";
 import EditProfile from "./components/EditProfile";
 import ChatPage from "./components/ChatPage";
-import {io} from "socket.io-client"
+import { io } from "socket.io-client"
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { setSocket } from "./redux/socketSlice";
 import { setOnlineUsers } from "./redux/chatSlice";
 import { setLikeNotification } from "./redux/rtnSlice";
 import ProtectedRoutes from "./components/ProtectedRoutes";
+import ExploreFeed from './components/ExploreFeed';
 
 const browserRouter = createBrowserRouter([
   {
@@ -35,6 +36,11 @@ const browserRouter = createBrowserRouter([
         path: '/chat',
         element: <ProtectedRoutes><ChatPage /></ProtectedRoutes>
       },
+      {
+        path: '/explore',
+        element: <ProtectedRoutes><ExploreFeed /></ProtectedRoutes>
+      }
+
     ]
   },
   {
@@ -84,7 +90,7 @@ function App() {
 
   return (
     <>
-      <RouterProvider router={browserRouter}/>
+      <RouterProvider router={browserRouter} />
     </>
   );
 }

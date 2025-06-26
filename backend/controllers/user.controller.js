@@ -220,3 +220,29 @@ export const followOrUnfollow = async (req, res) =>{
         console.log(error);
     }
 }
+
+export const searchUsers = async (req, res) => {
+  try {
+    const query = req.query.q;
+
+    if (!query) {
+      return res.status(400).json({ success: false, message: "Query is required" });
+    }
+
+    const users = await User.find({
+      $or: [
+        { username: { $regex: query, $options: "i" } },
+        { email: { $regex: query, $options: "i" } }
+      ]
+    }).select("-password").limit(10);
+
+    res.status(200).json({
+      success: true,
+      users
+    });
+
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ success: false, message: "Internal Server Error" });
+  }
+};
