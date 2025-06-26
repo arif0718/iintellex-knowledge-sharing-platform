@@ -137,7 +137,6 @@ const Post = ({ post }) => {
   };
 
   return (
-    // w-full property we remove
     <div className="my-8 px-2 w-full max-w-[500px] mx-auto">
 
       <div className="flex items-center justify-between ">

@@ -6,8 +6,10 @@ import {
   PlusSquare,
   Search,
   TrendingUp,
+  Menu,
+  X,
 } from "lucide-react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
@@ -27,6 +29,17 @@ const LeftSidebar = () => {
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const [popoverOpen, setPopoverOpen] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  // Disable scroll when sidebar is open (mobile)
+  useEffect(() => {
+    if (sidebarOpen) {
+      document.body.classList.add("overflow-hidden");
+    } else {
+      document.body.classList.remove("overflow-hidden");
+    }
+    return () => document.body.classList.remove("overflow-hidden");
+  }, [sidebarOpen]);
 
   const logouthandler = async () => {
     try {
@@ -61,6 +74,7 @@ const LeftSidebar = () => {
     } else if (textType === "Explore") {
       navigate("/explore");
     }
+    setSidebarOpen(false);
   };
 
   const SidebarItems = [
@@ -83,63 +97,113 @@ const LeftSidebar = () => {
   ];
 
   return (
-    <div className="fixed top-0 z-10 left-0 px-4 border-r border-gray-300 w-[16%] h-screen ">
-      <div className="flex flex-col">
-        <div className="flex">
-          <img src="/iintellex-favicon.png" alt="iintellex logo" className="w-7 h-7 my-8" />
-          <h1 style={{ fontFamily: 'Pacifico, cursive' }} className="my-8 pl-2 font-medium text-2xl">iintellex</h1>
-        </div>
-
-        {SidebarItems.map((item, index) => (
-          <div
-            onClick={() => sidebarHandler(item.text)}
-            key={index}
-            className="flex items-center gap-3 relative hover:bg-gray-100 cursor-pointer rounded-lg p-3 my-3"
-          >
-            {item.icon}
-            <span>{item.text}</span>
-
-            {item.text === "Notifications" && likeNotification.length > 0 && (
-              <Popover
-                open={popoverOpen}
-                onOpenChange={(open) => {
-                  if (!open && popoverOpen) {
-                    dispatch(clearLikeNotification());
-                  }
-                  setPopoverOpen(open);
-                }}
-              >
-                <PopoverTrigger asChild>
-                  <Button
-                    size="icon"
-                    className="rounded-full h-5 w-5 bg-red-600 hover:bg-red-600 absolute bottom-6 left-6"
-                  >
-                    {likeNotification.length}
-                  </Button>
-                </PopoverTrigger>
-                <PopoverContent>
-                  <div>
-                    {likeNotification.map((notification) => (
-                      <div key={notification.userId} className="flex items-center gap-2 my-2">
-                        <Avatar>
-                          <AvatarImage src={notification.userDetails?.profilePicture} />
-                          <AvatarFallback>CN</AvatarFallback>
-                        </Avatar>
-                        <p className="text-sm">
-                          <span className="font-bold">{notification.userDetails?.username}</span> liked your post
-                        </p>
-                      </div>
-                    ))}
-                  </div>
-                </PopoverContent>
-              </Popover>
-            )}
-          </div>
-        ))}
+    <>
+      {/* Mobile Top Bar */}
+      <div className="md:hidden fixed top-10 left-4 z-40 flex items-center gap-2">
+        <img src="/iintellex-favicon.png" alt="logo" className="w-6 h-6" />
+        <h1
+          style={{ fontFamily: "Pacifico, cursive" }}
+          className="text-lg font-semibold"
+        >
+          iintellex
+        </h1>
       </div>
 
-      <CreatePost open={open} setOpen={setOpen} />
-    </div>
+      <div className="md:hidden fixed top-9 right-4 z-40">
+        {sidebarOpen ? (
+          <X
+            className="h-8 w-8 cursor-pointer"
+            onClick={() => setSidebarOpen(false)}
+          />
+        ) : (
+          <Menu
+            className="h-8 w-8 cursor-pointer"
+            onClick={() => setSidebarOpen(true)}
+          />
+        )}
+      </div>
+
+      {/* Sidebar */}
+      <div
+        className={`
+          fixed z-30 h-screen w-[70%] md:w-[16%] px-4 transition-transform duration-300 
+          backdrop-blur-lg bg-white/30 md:bg-white md:backdrop-blur-none 
+          border-l md:border-r border-gray-300 
+          ${sidebarOpen ? "translate-x-0 top-16 right-0" : "translate-x-full top-16 right-0"} 
+          md:translate-x-0 md:top-0 md:left-0
+        `}
+      >
+        <div className="flex flex-col pt-16 md:pt-10">
+          {/* Desktop Logo */}
+          <div className="hidden md:flex items-center mb-8">
+            <img src="/iintellex-favicon.png" alt="logo" className="w-7 h-7" />
+            <h1
+              style={{ fontFamily: "Pacifico, cursive" }}
+              className="pl-2 font-medium text-2xl"
+            >
+              iintellex
+            </h1>
+          </div>
+
+          {SidebarItems.map((item, index) => (
+            <div
+              onClick={() => sidebarHandler(item.text)}
+              key={index}
+              className="flex items-center gap-3 relative hover:bg-gray-100 cursor-pointer rounded-lg p-3 my-2"
+            >
+              {item.icon}
+              <span>{item.text}</span>
+
+              {item.text === "Notifications" && likeNotification.length > 0 && (
+                <Popover
+                  open={popoverOpen}
+                  onOpenChange={(open) => {
+                    if (!open && popoverOpen) {
+                      dispatch(clearLikeNotification());
+                    }
+                    setPopoverOpen(open);
+                  }}
+                >
+                  <PopoverTrigger asChild>
+                    <Button
+                      size="icon"
+                      className="rounded-full h-5 w-5 bg-red-600 hover:bg-red-600 absolute bottom-6 left-6"
+                    >
+                      {likeNotification.length}
+                    </Button>
+                  </PopoverTrigger>
+                  <PopoverContent>
+                    <div>
+                      {likeNotification.map((notification) => (
+                        <div
+                          key={notification.userId}
+                          className="flex items-center gap-2 my-2"
+                        >
+                          <Avatar>
+                            <AvatarImage
+                              src={notification.userDetails?.profilePicture}
+                            />
+                            <AvatarFallback>CN</AvatarFallback>
+                          </Avatar>
+                          <p className="text-sm">
+                            <span className="font-bold">
+                              {notification.userDetails?.username}
+                            </span>{" "}
+                            liked your post
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                  </PopoverContent>
+                </Popover>
+              )}
+            </div>
+          ))}
+        </div>
+
+        <CreatePost open={open} setOpen={setOpen} />
+      </div>
+    </>
   );
 };
 

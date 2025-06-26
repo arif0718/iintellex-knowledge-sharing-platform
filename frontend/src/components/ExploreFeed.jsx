@@ -8,7 +8,6 @@ const ExploreFeed = () => {
 
   return (
     <div className="pl-[17%] pr-[2%] pt-8 min-h-screen bg-gray-50">
-      <h2 className="text-2xl font-semibold mb-6">Explore Posts</h2>
 
       <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4">
         {posts.map((post) => (
