@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Dialog, DialogContent, DialogTrigger } from "./ui/dialog";
 import { MessageCircle, MoreHorizontal, Send } from "lucide-react";
@@ -20,11 +20,17 @@ const Post = ({ post }) => {
   const { posts } = useSelector((store) => store.post);
   const [liked, setLiked] = useState(post.likes.includes(user?._id) || false);
   const [bookmarked, setBookmarked] = useState(
-    !!user?.Bookmarks?.includes(post._id) ||false
+    !!user?.Bookmarks?.includes(post._id) || false
   );
   const [postLike, setPostLike] = useState(post.likes.length);
   const [comment, setComment] = useState(post.comments);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (post) {
+      setComment(post.comments);
+    }
+  }, [post]);
 
   const changeEventHandler = (e) => {
     const inputText = e.target.value;
@@ -84,7 +90,7 @@ const Post = ({ post }) => {
         setComment(updatedCommentData);
 
         const updatedpostData = posts.map((p) =>
-          p._id === post._id ? { ...p, comment: updatedCommentData } : p
+          p._id === post._id ? { ...p, comments: updatedCommentData } : p
         );
 
         dispatch(setPosts(updatedpostData));
@@ -132,7 +138,8 @@ const Post = ({ post }) => {
 
   return (
     // w-full property we remove
-    <div className="my-8 max-w-sm mx-auto">
+    <div className="my-8 px-2 w-full max-w-[500px] mx-auto">
+
       <div className="flex items-center justify-between ">
         <div className="flex items-center gap-2">
           <Avatar>
@@ -160,14 +167,14 @@ const Post = ({ post }) => {
               </Button>
             )}
 
-            <Button variant="ghost" className="cursor-pointer w-fit ">
+            <Button variant="ghost" className="cursor-pointer w-fit">
               Add to favorites
             </Button>
             {user && user?._id == post?.author._id && (
               <Button
                 onClick={deleteHandler}
                 variant="ghost"
-                className="cursor-pointer w-fit "
+                className="cursor-pointer w-fit text-[#ED4956] font-bold"
               >
                 Delete
               </Button>
@@ -175,11 +182,14 @@ const Post = ({ post }) => {
           </DialogContent>
         </Dialog>
       </div>
-      <img
-        className="rounded-sm my-2 w-full aspect-square object-cover"
-        src={post.image}
-        alt="post_img"
-      />
+      
+      <div className="w-[420px] min-w-[260px] max-w-[480px] mx-auto">
+        <img
+          className="rounded-sm my-2 w-full min-h-[420px] max-h-[540px] object-cover"
+          src={post.image}
+          alt="post_img"
+        />
+      </div>
 
       <div className="flex items-center justify-between my-2">
         <div className="flex items-center gap-3">
@@ -221,15 +231,17 @@ const Post = ({ post }) => {
         <span className="font-medium mr-2">{post.author?.username}</span>
         {post.caption}
       </p>
-      <span
-        onClick={() => {
-          dispatch(setSelectedPost(post));
-          setOpen(true);
-        }}
-        className="cursor-pointer text-sm text-gray-400"
-      >
-        View all {comment.length} comments
-      </span>
+      {comment.length > 0 && (
+        <span
+          onClick={() => {
+            dispatch(setSelectedPost(post));
+            setOpen(true);
+          }}
+          className="cursor-pointer text-sm text-gray-400"
+        >
+          View all {comment.length} comments
+        </span>
+      )}
       <CommentDialog open={open} setOpen={setOpen} />
 
       <div className="flex items-center justify-between">

@@ -45,7 +45,7 @@ const CreatePost = ({ open, setOpen }) => {
       });
 
       if(res.data.success) {
-        dispatch(setPosts([res.data.post, ...posts]))   //[1]->[1,2] modify the value (after adding new post its auto shows wihtout refresing the page)
+        dispatch(setPosts([...posts, res.data.post]))   //[1]->[1,2] modify the value (after adding new post its auto shows wihtout refresing the page)
         toast.success(res.data.message);
         setOpen(false);
       }

@@ -23,7 +23,7 @@ const CommentDialog = ({ open, setOpen }) => {
     if(selectedPost){
       setComment(selectedPost.comments);
     }
-  }, []);
+  }, [selectedPost]);
 
   //after writing the comment check comment is there or not then set the text
   const changeEventHandler = (e) => {
@@ -72,7 +72,7 @@ const CommentDialog = ({ open, setOpen }) => {
         setComment(updatedCommentData);
 
         const updatedpostData = posts.map((p) =>
-          p._id === selectedPost._id ? { ...p, comment: updatedCommentData } : p
+          p._id === selectedPost?._id ? { ...p, comments: updatedCommentData } : p
         );
 
         dispatch(setPosts(updatedpostData));

@@ -45,8 +45,15 @@ const Login = () => {
         } catch (error) {
             console.log(error);
             toast.error(error.response.data.message);
+            if(error.response.data.message==="Incorrrect Password!") setInput({password:""});
+            else setInput({
+                    email:"",
+                    password:""
+                })
+            
         } finally {
             setLoading(false);
+            
         }
     }
 
