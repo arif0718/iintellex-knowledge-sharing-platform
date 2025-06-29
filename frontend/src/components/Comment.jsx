@@ -1,5 +1,6 @@
 import React from 'react'
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar'
+import { UserRound } from 'lucide-react'
 
 const Comment = ({comment}) => {
   return (
@@ -7,7 +8,7 @@ const Comment = ({comment}) => {
         <div className="flex gap-3 items-center">
             <Avatar>
                 <AvatarImage src={comment?.author?.profilePicture} />
-                <AvatarFallback>CN</AvatarFallback>
+                <AvatarFallback><UserRound /></AvatarFallback>
             </Avatar>
             <h1 className='font-bold text-sm'>{comment?.author?.username} <span className="font-normal pl-1">{comment?.text}</span></h1>
         </div>

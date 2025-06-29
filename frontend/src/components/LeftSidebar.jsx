@@ -89,7 +89,7 @@ const LeftSidebar = () => {
       icon: (
         <Avatar className="w-6 h-6">
           <AvatarImage src={user?.profilePicture} alt="@user" />
-          <AvatarFallback>CN</AvatarFallback>
+          <AvatarFallback><UserRound /></AvatarFallback>
         </Avatar>
       ),
       text: "Profile",
@@ -176,7 +176,7 @@ const LeftSidebar = () => {
                             <AvatarImage
                               src={notification.userDetails?.profilePicture}
                             />
-                            <AvatarFallback>CN</AvatarFallback>
+                            <AvatarFallback><UserRound /></AvatarFallback>
                           </Avatar>
                           <p className="text-sm">
                             <span className="font-bold">

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Dialog, DialogContent, DialogTrigger } from "./ui/dialog";
 import { Link } from "react-router-dom";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
-import { MoreHorizontal } from "lucide-react";
+import { MoreHorizontal, UserRound } from "lucide-react";
 import { Button } from "./ui/button";
 import { useDispatch, useSelector } from "react-redux";
 import { setPosts } from "@/redux/postSlice";
@@ -104,7 +104,7 @@ const CommentDialog = ({ open, setOpen }) => {
                 <Link>
                   <Avatar>
                     <AvatarImage src={selectedPost?.author?.profilePicture} />
-                    <AvatarFallback>CN</AvatarFallback>
+                    <AvatarFallback><UserRound /></AvatarFallback>
                   </Avatar>
                 </Link>
 

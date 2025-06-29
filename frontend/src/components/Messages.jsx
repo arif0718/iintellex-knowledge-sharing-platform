@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import useGetAllMessage from '@/hooks/useGetAllMessage'
 import useGetRTM from '@/hooks/useGetRTM'
+import { UserRound } from 'lucide-react'
 
 const Messages = ({ selectedUser }) => {
     useGetRTM();
@@ -17,7 +18,7 @@ const Messages = ({ selectedUser }) => {
                 <div className='flex flex-col items-center justify-center'>
                     <Avatar className="h-20 w-20">
                         <AvatarImage src={selectedUser?.profilePicture} alt='profile' />
-                        <AvatarFallback>CN</AvatarFallback>
+                        <AvatarFallback><UserRound /></AvatarFallback>
                     </Avatar>
                     <span>{selectedUser?.username}</span>
                     <Link to={`/profile/${selectedUser?._id}`}><Button className="h-8 my-2" variant="secondary">View profile</Button></Link>

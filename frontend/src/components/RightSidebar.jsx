@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
 import { Link } from 'react-router-dom';
 import SuggestedUsers from './SuggestedUsers';
+import { UserRound } from 'lucide-react';
 
 const RightSidebar = () => {
   const { user } = useSelector(store => store.auth);
@@ -12,7 +13,7 @@ const RightSidebar = () => {
         <Link to={`/profile/${user?._id}`}>
           <Avatar>
             <AvatarImage src={user?.profilePicture} alt="post_image" />
-            <AvatarFallback>CN</AvatarFallback>
+            <AvatarFallback><UserRound /></AvatarFallback>
           </Avatar>
         </Link>
         <div>

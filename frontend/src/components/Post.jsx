@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Dialog, DialogContent, DialogTrigger } from "./ui/dialog";
-import { MessageCircle, MoreHorizontal, Send } from "lucide-react";
+import { MessageCircle, MoreHorizontal, Send, UserRound } from "lucide-react";
 import { BookmarkIcon as BookmarkOutline } from "@heroicons/react/24/outline";
 import { BookmarkIcon as BookmarkSolid } from "@heroicons/react/24/solid";
 import { Button } from "./ui/button";
@@ -143,7 +143,7 @@ const Post = ({ post }) => {
         <div className="flex items-center gap-2">
           <Avatar>
             <AvatarImage src={post.author?.profilePicture} alt="post-image" />
-            <AvatarFallback>CN</AvatarFallback>
+            <AvatarFallback><UserRound /></AvatarFallback>
           </Avatar>
           <div className="flex items-center gap-3">
             <h1>{post.author?.username}</h1>

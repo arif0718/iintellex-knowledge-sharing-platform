@@ -4,7 +4,7 @@ import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
 import { Textarea } from './ui/textarea';
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from './ui/select';
 import axios from 'axios';
-import { Loader2 } from 'lucide-react';
+import { Loader2, UserRound } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
 import { setAuthUser } from '@/redux/authSlice';
@@ -74,7 +74,7 @@ const EditProfile = () => {
                     <div className='flex items-center gap-3'>
                         <Avatar>
                             <AvatarImage src={user?.profilePicture} alt="post_image" />
-                            <AvatarFallback>CN</AvatarFallback>
+                            <AvatarFallback><UserRound /></AvatarFallback>
                         </Avatar>
                         <div>
                             <h1 className='font-bold text-sm'>{user?.username}</h1>

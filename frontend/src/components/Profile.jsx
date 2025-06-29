@@ -8,6 +8,7 @@ import { FaComment, FaHeart } from "react-icons/fa";
 import axios from "axios";
 import { toast } from "sonner";
 import { setUserProfile } from "@/redux/authSlice";
+import { UserRound } from "lucide-react";
 
 const Profile = () => {
   const params = useParams(); //use when we have to data from url
@@ -74,7 +75,7 @@ const Profile = () => {
                 src={userProfile?.profilePicture}
                 alt="profilephoto"
               />
-              <AvatarFallback>CN</AvatarFallback>
+              <AvatarFallback><UserRound /></AvatarFallback>
             </Avatar>
           </section>
           <section>

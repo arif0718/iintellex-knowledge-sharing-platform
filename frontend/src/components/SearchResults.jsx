@@ -2,6 +2,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import { UserRound } from "lucide-react";
 
 const SearchResults = ({ users }) => {
   return (
@@ -14,7 +15,7 @@ const SearchResults = ({ users }) => {
         >
           <Avatar className="h-8 w-8">
             <AvatarImage src={user.profilePicture} alt={user.username} />
-            <AvatarFallback>{user.username?.[0]}</AvatarFallback>
+            <AvatarFallback><UserRound /></AvatarFallback>
           </Avatar>
           <span className="font-medium">{user.username}</span>
         </Link>

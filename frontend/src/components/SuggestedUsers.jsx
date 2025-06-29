@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import { UserRound } from "lucide-react";
 
 const SuggestedUsers = () => {
     const { suggestedUsers } = useSelector(store => store.auth);
@@ -20,7 +21,7 @@ const SuggestedUsers = () => {
                         <Link to={`/profile/${user?._id}`}>
                             <Avatar>
                                 <AvatarImage src={user?.profilePicture} alt="post_image" />
-                                <AvatarFallback>CN</AvatarFallback>
+                                <AvatarFallback><UserRound /></AvatarFallback>
                             </Avatar>
                         </Link>
                         <div>

@@ -4,7 +4,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Textarea } from "./ui/textarea";
 import { Button } from "./ui/button";
 import { readFileAsDataURL } from "@/lib/utils";
-import { Loader2 } from "lucide-react";
+import { Loader2, UserRound } from "lucide-react";
 import { toast } from "sonner";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
@@ -66,7 +66,7 @@ const CreatePost = ({ open, setOpen }) => {
         <div className="flex gap-3 items-center">
           <Avatar>
             <AvatarImage src={user?.profilePicture} alt="img" />
-            <AvatarFallback>CN</AvatarFallback>
+            <AvatarFallback><UserRound /></AvatarFallback>
           </Avatar>
 
           <div>

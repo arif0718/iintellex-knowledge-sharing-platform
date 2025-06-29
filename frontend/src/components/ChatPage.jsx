@@ -4,7 +4,7 @@ import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
 import { setSelectedUser } from '@/redux/authSlice';
 import { Input } from './ui/input';
 import { Button } from './ui/button';
-import { MessageCircleCode } from 'lucide-react';
+import { MessageCircleCode, UserRound } from 'lucide-react';
 import Messages from './Messages';
 import axios from 'axios';
 import { setMessages } from '@/redux/chatSlice';
@@ -53,7 +53,7 @@ const ChatPage = () => {
                                 <div onClick={() => dispatch(setSelectedUser(suggestedUser))} className='flex gap-3 items-center p-3 hover:bg-gray-50 cursor-pointer'>
                                     <Avatar className='w-14 h-14'>
                                         <AvatarImage src={suggestedUser?.profilePicture} />
-                                        <AvatarFallback>CN</AvatarFallback>
+                                        <AvatarFallback><UserRound /></AvatarFallback>
                                     </Avatar>
                                     <div className='flex flex-col'>
                                         <span className='font-medium'>{suggestedUser?.username}</span>
@@ -72,7 +72,7 @@ const ChatPage = () => {
                         <div className='flex gap-3 items-center px-3 py-2 border-b border-gray-300 sticky top-0 bg-white z-10'>
                             <Avatar>
                                 <AvatarImage src={selectedUser?.profilePicture} alt='profile' />
-                                <AvatarFallback>CN</AvatarFallback>
+                                <AvatarFallback><UserRound /></AvatarFallback>
                             </Avatar>
                             <div className='flex flex-col'>
                                 <span>{selectedUser?.username}</span>
