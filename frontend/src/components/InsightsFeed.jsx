@@ -2,7 +2,7 @@ import React from "react";
 import useGetAllPost from "@/hooks/useGetAllPost";
 import { useSelector } from "react-redux";
 
-const ExploreFeed = () => {
+const InsightsFeed = () => {
   useGetAllPost(); // Fetches all posts using Redux
   const { posts } = useSelector((store) => store.post);
 
@@ -35,5 +35,5 @@ const ExploreFeed = () => {
   );
 };
 
-export default ExploreFeed;
+export default InsightsFeed;
 

@@ -1,14 +1,14 @@
 import {
-  Heart,
   Home,
   LogOut,
-  MessageCircle,
-  PlusSquare,
-  Search,
   UserRound,
-  TrendingUp,
   Menu,
   X,
+  UserRoundSearch,
+  ChartNoAxesCombined,
+  MessageSquareText,
+  Bell,
+  Upload,
 } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
@@ -62,32 +62,32 @@ const LeftSidebar = () => {
   const sidebarHandler = (textType) => {
     if (textType === "Logout") {
       logouthandler();
-    } else if (textType === "Create") {
+    } else if (textType === "Upload") {
       setOpen(true);
     } else if (textType === "Profile") {
       navigate(`/profile/${user?._id}`);
     } else if (textType === "Home") {
       navigate("/");
-    } else if (textType === "Messages") {
+    } else if (textType === "Connect") {
       navigate("/chat");
     } else if (textType === "Search") {
       navigate("/", { state: { focusSearch: true } });
-    } else if (textType === "Explore") {
-      navigate("/explore");
+    } else if (textType === "Insights") {
+      navigate("/insights");
     }
     setSidebarOpen(false);
   };
 
   const SidebarItems = [
     { icon: <Home />, text: "Home" },
-    { icon: <UserRound />, text: "Search" },
-    { icon: <TrendingUp />, text: "Explore" },
-    { icon: <MessageCircle />, text: "Messages" },
-    { icon: <Heart />, text: "Notifications" },
-    { icon: <PlusSquare />, text: "Create" },
+    { icon: <UserRoundSearch />, text: "Search" },
+    { icon: <ChartNoAxesCombined />, text: "Insights" },
+    { icon: <MessageSquareText />, text: "Connect" },
+    { icon: <Bell />, text: "Updates" },
+    { icon: <Upload />, text: "Upload" },
     {
       icon: (
-        <Avatar className="w-6 h-6">
+        <Avatar className="w-7 h-7 ">
           <AvatarImage src={user?.profilePicture} alt="@user" />
           <AvatarFallback><UserRound /></AvatarFallback>
         </Avatar>
@@ -147,7 +147,7 @@ const LeftSidebar = () => {
               {item.icon}
               <span>{item.text}</span>
 
-              {item.text === "Notifications" && likeNotification.length > 0 && (
+              {item.text === "Updates" && likeNotification.length > 0 && (
                 <Popover
                   open={popoverOpen}
                   onOpenChange={(open) => {

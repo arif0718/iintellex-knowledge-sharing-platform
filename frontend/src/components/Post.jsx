@@ -214,7 +214,7 @@ const Post = ({ post }) => {
             }}
             className="cursor-pointer hover:text-gray-600"
           />
-          <Send className="cursor-pointer hover:text-gray-600" />
+          {/* <Send className="cursor-pointer hover:text-gray-600" /> */}
         </div>
         <button onClick={bookmarkHandler}>
           {bookmarked ? (
