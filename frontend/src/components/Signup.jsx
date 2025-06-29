@@ -61,15 +61,17 @@ const Signup = () => {
   }, []);
 
   return (
-    <div className="flex items-center w-screen h-screen justify-center">
+    <div className="flex items-center justify-center min-h-screen w-full bg-gradient-to-b from-white to-[#4a6d95] px-2">
       <form
         onSubmit={signupHandler}
-        className="shadow-lg flex flex-col gap-5 p-8"
+        className="shadow-2xl flex flex-col gap-5 p-6 sm:p-10 bg-gradient-to-b from-white to-[#8295ac] rounded-md w-full max-w-xs sm:max-w-sm md:max-w-md"
       >
-        <div className="my-4">
-          <h1 className="text-center font-bold text-xl">LOGO</h1>
-          <p className="text-sm text-center">
-            Signup to see photos & videos from your friends
+        <div className="my-2 mb-6">
+          <div className="justify-center flex items-center mb-4">
+            <img src="/iintellex-logo.png" alt="logo" className="w-32 sm:w-40 md:w-48" />
+          </div>
+          <p className="text-sm text-center w-full max-w-xs mx-auto">
+            Sign up to share knowledge, discover industry trends, and connect with future innovators
           </p>
         </div>
         <div>
@@ -79,7 +81,7 @@ const Signup = () => {
             name="username"
             value={input.username}
             onChange={changeEventHandler}
-            className="focus-visible:ring-tranparent my-2"
+            className="focus-visible:ring-transparent my-2"
           />
         </div>
         <div>
@@ -89,7 +91,7 @@ const Signup = () => {
             name="email"
             value={input.email}
             onChange={changeEventHandler}
-            className="focus-visible:ring-tranparent my-2"
+            className="focus-visible:ring-transparent my-2"
           />
         </div>
         <div>
@@ -99,10 +101,9 @@ const Signup = () => {
             name="password"
             value={input.password}
             onChange={changeEventHandler}
-            className="focus-visible:ring-tranparent my-2"
+            className="focus-visible:ring-transparent my-2 mb-8"
           />
         </div>
-
         {/* code for showing loading logo in button */}
         {loading ? (
           <Button>
@@ -110,11 +111,11 @@ const Signup = () => {
             Please wait
           </Button>
         ) : (
-          <Button type="submit">Signup</Button>
+          <Button type="submit" className="cursor-pointer">Signup</Button>
         )}
-        <span className="text-center">
+        <span className="text-center text-xs sm:text-sm">
           Already have an account?{" "}
-          <Link to="/login" className="text-blue-600">
+          <Link to="/login" className="text-blue-900 font-semibold hover:underline">
             Login
           </Link>
         </span>

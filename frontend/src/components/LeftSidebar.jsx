@@ -5,6 +5,7 @@ import {
   MessageCircle,
   PlusSquare,
   Search,
+  UserRound,
   TrendingUp,
   Menu,
   X,
@@ -79,7 +80,7 @@ const LeftSidebar = () => {
 
   const SidebarItems = [
     { icon: <Home />, text: "Home" },
-    { icon: <Search />, text: "Search" },
+    { icon: <UserRound />, text: "Search" },
     { icon: <TrendingUp />, text: "Explore" },
     { icon: <MessageCircle />, text: "Messages" },
     { icon: <Heart />, text: "Notifications" },
@@ -123,26 +124,18 @@ const LeftSidebar = () => {
         )}
       </div>
 
-      {/* Sidebar */}
       <div
         className={`
-          fixed z-30 h-screen w-[70%] md:w-[16%] px-4 transition-transform duration-300 
+          fixed z-30 h-screen w-[70%] md:w-[18%] px-4 transition-transform duration-300 
           backdrop-blur-lg bg-white/30 md:bg-white md:backdrop-blur-none 
-          border-l md:border-r border-gray-300 
+          border-l md:border-r border-gray-300 bg-gradient-to-b from-white to-[#4a6d95]
           ${sidebarOpen ? "translate-x-0 top-16 right-0" : "translate-x-full top-16 right-0"} 
           md:translate-x-0 md:top-0 md:left-0
         `}
       >
         <div className="flex flex-col pt-16 md:pt-10">
-          {/* Desktop Logo */}
           <div className="hidden md:flex items-center mb-8">
-            <img src="/iintellex-favicon.png" alt="logo" className="w-7 h-7" />
-            <h1
-              style={{ fontFamily: "Pacifico, cursive" }}
-              className="pl-2 font-medium text-2xl"
-            >
-              iintellex
-            </h1>
+            <img src="/iintellex-logo.png" alt="logo" className="w-45" />
           </div>
 
           {SidebarItems.map((item, index) => (
