@@ -9,6 +9,7 @@ import axios from "axios";
 import { toast } from "sonner";
 import { setUserProfile } from "@/redux/authSlice";
 import { UserRound } from "lucide-react";
+import LeftSidebar from "./LeftSidebar";
 
 const Profile = () => {
   const params = useParams(); //use when we have to data from url
@@ -66,11 +67,20 @@ const Profile = () => {
   }, [userProfile, user?._id]);
 
   return (
-    <div className="flex max-w-5xl justify-center mx-auto pl-10">
-      <div className="flex flex-col gap-20 p-8">
-        <div className="grid grid-cols-2">
-          <section className="flex items-center justify-center">
-            <Avatar className="h-32 w-32">
+    <div className="mt-8">
+<div className="md:hidden flex">
+        <div className="md:hidden flex items-center justify-between w-full px-4 ">
+          <div className="z-40">
+            <img src="/iintellex-logo.png" alt="logo" className="w-20 mb-4" />
+          </div>
+        </div>
+        <LeftSidebar />
+      </div>
+    <div className="flex max-w-5xl justify-center mx-auto px-2 md:pl-10">
+      <div className="flex flex-col gap-10 md:gap-20 p-2 sm:p-4 md:p-8 w-full">
+        <div className="grid grid-cols-1 md:grid-cols-2">
+          <section className="flex items-center justify-center mb-4 md:mb-0">
+            <Avatar className="h-24 w-24 sm:h-32 sm:w-32">
               <AvatarImage
                 src={userProfile?.profilePicture}
                 alt="profilephoto"
@@ -79,28 +89,30 @@ const Profile = () => {
             </Avatar>
           </section>
           <section>
-            <div className="flex flex-col gap-5">
-              <div className="flex items-center gap-2">
-                <span>{userProfile?.username}</span>
+            <div className="flex flex-col gap-4 sm:gap-5">
+              <div className="flex flex-wrap justify-center sm:justify-start items-center gap-2">
+                <span className="block w-full text-center sm:w-auto text-lg sm:text-xl font-semibold">
+                  {userProfile?.username}
+                </span>
                 {isLoggedInUserProfile ? (
                   <>
                     <Link to="/account/edit">
                       <Button
                         variant="secondary"
-                        className="hover:bg-gray-200 h-8"
+                        className="hover:bg-gray-200 h-8 text-xs sm:text-sm"
                       >
                         Edit profile
                       </Button>
                     </Link>
                     <Button
                       variant="secondary"
-                      className="hover:bg-gray-200 h-8"
+                      className="hover:bg-gray-200 h-8 text-xs sm:text-sm"
                     >
                       View archive
                     </Button>
                     <Button
                       variant="secondary"
-                      className="hover:bg-gray-200 h-8"
+                      className="hover:bg-gray-200 h-8 text-xs sm:text-sm"
                     >
                       Ad tools
                     </Button>
@@ -110,24 +122,24 @@ const Profile = () => {
                     <Button
                       onClick={followUnfollowHandler}
                       variant="secondary"
-                      className="h-8 cursor-pointer"
+                      className="h-8 cursor-pointer text-xs sm:text-sm"
                     >
                       Unfollow
                     </Button>
-                    <Button variant="secondary" className="h-8 cursor-pointer">
+                    <Button variant="secondary" className="h-8 cursor-pointer text-xs sm:text-sm">
                       Message
                     </Button>
                   </>
                 ) : (
                   <Button
                     onClick={followUnfollowHandler}
-                    className="bg-[#0095F6] hover:bg-[#3192d2] h-8 cursor-pointer"
+                    className="bg-[#0095F6] hover:bg-[#3192d2] h-8 cursor-pointer text-xs sm:text-sm"
                   >
                     Follow
                   </Button>
                 )}
               </div>
-              <div className="flex items-center gap-4">
+              <div className="flex flex-wrap justify-center md:justify-start items-center gap-10 md:gap-4 text-sm sm:text-base">
                 <p>
                   <span className="font-semibold">
                     {userProfile?.posts.length}{" "}
@@ -143,34 +155,28 @@ const Profile = () => {
                   following
                 </p>
               </div>
-              <div className="flex flex-col gap-1">
-                <span className="font-semibold">
+                <span className="ml-8 md:ml-0 text-sm sm:text-base">
                   {userProfile?.bio || "bio here..."}
                 </span>
-              </div>
             </div>
           </section>
         </div>
         <div className="border-t border-t-gray-200">
-          <div className="flex items-center justify-center gap-10 text-sm">
+          <div className="flex items-center justify-center gap-6 sm:gap-10 text-xs sm:text-sm">
             <span
-              className={`py-3 cursor-pointer ${
-                activeTab === "posts" ? "font-bold" : ""
-              }`}
+              className={`py-3 cursor-pointer ${activeTab === "posts" ? "font-bold" : ""}`}
               onClick={() => handleTabChange("posts")}
             >
               POSTS
             </span>
             <span
-              className={`py-3 cursor-pointer ${
-                activeTab === "saved" ? "font-bold" : ""
-              }`}
+              className={`py-3 cursor-pointer ${activeTab === "saved" ? "font-bold" : ""}`}
               onClick={() => handleTabChange("saved")}
             >
               SAVED
             </span>
           </div>
-          <div className="grid grid-cols-3 gap-1">
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-1">
             {displayedPost?.map((post) => {
               return (
                 <div key={post?._id} className="relative group cursor-pointer">
@@ -182,14 +188,14 @@ const Profile = () => {
                   <div className="absolute inset-0 flex items-center justify-center bg-black opacity-0 group-hover:opacity-60 transition-opacity duration-300 rounded-sm my-2 w-full aspect-square">
                     <div className="flex items-center text-white space-x-4 cursor-pointer">
                       <button className="flex items-center gap-2 hover:text-gray-300 cursor-pointer">
-                        <FaHeart size={"24"} className="text-white" />
-                        <span className="text-xl font-bold">
+                        <FaHeart size={18} className="text-white sm:text-xl" />
+                        <span className="text-base sm:text-xl font-bold">
                           {post?.likes.length}
                         </span>
                       </button>
                       <button className="flex items-center gap-2 cursor-pointer">
-                        <FaComment size={"24"} className="text-white" />
-                        <span className="text-xl font-bold">
+                        <FaComment size={18} className="text-white sm:text-xl" />
+                        <span className="text-base sm:text-xl font-bold">
                           {post?.comments.length}
                         </span>
                       </button>
@@ -201,6 +207,7 @@ const Profile = () => {
           </div>
         </div>
       </div>
+    </div>
     </div>
   );
 };

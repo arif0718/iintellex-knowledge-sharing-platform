@@ -60,7 +60,7 @@ const CreatePost = ({ open, setOpen }) => {
     <Dialog open={open}>
       <DialogContent onInteractOutside={() => setOpen(false)}>
         <DialogTitle className="text-center font-semibold">
-          Create New Post
+          Upload New Post
         </DialogTitle>
 
         <div className="flex gap-3 items-center">

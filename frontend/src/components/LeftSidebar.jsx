@@ -107,7 +107,7 @@ const LeftSidebar = () => {
 
       <div
         className={`
-          fixed z-30 top-0 h-screen w-[60%] md:w-[18%] px-4 transition-transform duration-300 
+          fixed z-30 top-0 h-screen w-[72%] md:w-[18%] px-4 transition-transform duration-300 
           backdrop-blur-lg bg-white/30 md:bg-white md:backdrop-blur-none 
           border-l md:border-r border-gray-300 bg-gradient-to-b from-white to-[#4a6d95]
           ${sidebarOpen ? "translate-x-0 right-0" : "translate-x-full top-16 right-0"} 
