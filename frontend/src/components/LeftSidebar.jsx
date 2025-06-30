@@ -32,16 +32,6 @@ const LeftSidebar = () => {
   const [popoverOpen, setPopoverOpen] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
-  // Disable scroll when sidebar is open (mobile)
-  useEffect(() => {
-    if (sidebarOpen) {
-      document.body.classList.add("overflow-hidden");
-    } else {
-      document.body.classList.remove("overflow-hidden");
-    }
-    return () => document.body.classList.remove("overflow-hidden");
-  }, [sidebarOpen]);
-
   const logouthandler = async () => {
     try {
       const res = await axios.get("http://localhost:8000/api/v1/user/logout", {
@@ -100,25 +90,16 @@ const LeftSidebar = () => {
   return (
     <>
       {/* Mobile Top Bar */}
-      <div className="md:hidden fixed top-10 left-4 z-40 flex items-center gap-2">
-        <img src="/iintellex-favicon.png" alt="logo" className="w-6 h-6" />
-        <h1
-          style={{ fontFamily: "Pacifico, cursive" }}
-          className="text-lg font-semibold"
-        >
-          iintellex
-        </h1>
-      </div>
 
-      <div className="md:hidden fixed top-9 right-4 z-40">
+      <div className="md:hidden top-9 right-4 z-40">
         {sidebarOpen ? (
           <X
-            className="h-8 w-8 cursor-pointer"
+            className="h-8 w-8 mt-1 cursor-pointer"
             onClick={() => setSidebarOpen(false)}
           />
         ) : (
           <Menu
-            className="h-8 w-8 cursor-pointer"
+            className="h-8 w-8 mt-1 cursor-pointer"
             onClick={() => setSidebarOpen(true)}
           />
         )}
@@ -126,10 +107,10 @@ const LeftSidebar = () => {
 
       <div
         className={`
-          fixed z-30 h-screen w-[70%] md:w-[18%] px-4 transition-transform duration-300 
+          fixed z-30 top-0 h-screen w-[60%] md:w-[18%] px-4 transition-transform duration-300 
           backdrop-blur-lg bg-white/30 md:bg-white md:backdrop-blur-none 
           border-l md:border-r border-gray-300 bg-gradient-to-b from-white to-[#4a6d95]
-          ${sidebarOpen ? "translate-x-0 top-16 right-0" : "translate-x-full top-16 right-0"} 
+          ${sidebarOpen ? "translate-x-0 right-0" : "translate-x-full top-16 right-0"} 
           md:translate-x-0 md:top-0 md:left-0
         `}
       >

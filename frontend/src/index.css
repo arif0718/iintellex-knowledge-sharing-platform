@@ -3,17 +3,13 @@
 
 @custom-variant dark (&:is(.dark *));
 
-.no-scroll {
-  overflow: hidden;
-}
-
 /* hide-scrollbar.css */
 .hide-scrollbar::-webkit-scrollbar {
   display: none;
 }
 .hide-scrollbar {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;     /* Firefox */
+  -ms-overflow-style: none; 
+  scrollbar-width: none;
 }
 
 

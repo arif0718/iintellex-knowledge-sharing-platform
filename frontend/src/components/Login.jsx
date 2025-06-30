@@ -70,7 +70,7 @@ const Login = () => {
                     <div className="justify-center flex items-center mb-4">
                         <img src="/iintellex-logo.png" alt="logo" className="w-32 sm:w-40 md:w-48" />
                     </div>
-                    <p className='text-sm text-center w-full max-w-xs mx-auto'>Log in to explore ideas, share insights, and connect with curious minds.</p>
+                    <p className='text-sm text-center w-full max-w-xs mx-auto'>Log in to explore ideas, share insights, and connect with curious minds</p>
                 </div>
 
                 <div>

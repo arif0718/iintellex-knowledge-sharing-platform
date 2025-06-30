@@ -7,9 +7,9 @@ const InsightsFeed = () => {
   const { posts } = useSelector((store) => store.post);
 
   return (
-    <div className="pl-[17%] pr-[2%] pt-8 min-h-screen bg-gray-50">
-
-      <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4">
+    <div className="pl-[5%] pr-[5%] pt-8 min-h-screen bg-gray-50">
+      {/* Responsive columns: 1 on extra small, 2 on small, 3 on md, 4 on lg */}
+      <div className="columns-1 xs:columns-2 sm:columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4">
         {posts.map((post) => (
           <div
             key={post._id}
@@ -36,4 +36,3 @@ const InsightsFeed = () => {
 };
 
 export default InsightsFeed;
-

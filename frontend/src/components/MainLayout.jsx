@@ -5,7 +5,9 @@ import LeftSidebar from './LeftSidebar'
 const MainLayout = () => {
   return (
     <div>
+      <div className='hidden md:block'>
         <LeftSidebar/>
+      </div>
         <div>
             <Outlet/>
         </div>

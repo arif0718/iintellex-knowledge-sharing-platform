@@ -57,11 +57,11 @@ const Post = ({ post }) => {
         const updatedpostData = posts.map((p) =>
           p._id == post._id
             ? {
-                ...p,
-                likes: liked
-                  ? p.likes.filter((id) => id !== user._id)
-                  : [...p.likes, user._id],
-              }
+              ...p,
+              likes: liked
+                ? p.likes.filter((id) => id !== user._id)
+                : [...p.likes, user._id],
+            }
             : p
         );
         dispatch(setPosts(updatedpostData));
@@ -137,16 +137,15 @@ const Post = ({ post }) => {
   };
 
   return (
-    <div className="my-8 px-2 w-full max-w-[500px] mx-auto">
-
-      <div className="flex items-center justify-between ">
+    <div className="break-inside-avoid md:my-4 bg-white shadow-md rounded-lg overflow-hidden flex flex-col">
+      <div className="flex items-center justify-between p-3 pb-0">
         <div className="flex items-center gap-2">
           <Avatar>
             <AvatarImage src={post.author?.profilePicture} alt="post-image" />
             <AvatarFallback><UserRound /></AvatarFallback>
           </Avatar>
           <div className="flex items-center gap-3">
-            <h1>{post.author?.username}</h1>
+            <h1 className="text-sm font-semibold">{post.author?.username}</h1>
             {user?._id === post.author._id && (
               <Badge variant="secondary">Author</Badge>
             )}
@@ -181,84 +180,91 @@ const Post = ({ post }) => {
           </DialogContent>
         </Dialog>
       </div>
-      
-      <div className="w-[420px] min-w-[260px] max-w-[480px] mx-auto">
-        <img
-          className="rounded-sm my-2 w-full min-h-[420px] max-h-[540px] object-cover"
-          src={post.image}
-          alt="post_img"
-        />
+
+      <div className="w-full mx-auto p-2">
+        {post.image && (
+          <img
+            className="rounded-sm my-2 w-full object-cover
+               min-h-[420px] max-h-[450px]  // for mobile
+               md:min-h-[420px] md:max-h-[540px] 
+               md:w-[420px] md:min-w-[260px] md:max-w-[480px]"
+            src={post.image}
+            alt="post_img"
+          />
+        )}
       </div>
 
-      <div className="flex items-center justify-between my-2">
-        <div className="flex items-center gap-3">
-          {liked ? (
-            <FaHeart
-              onClick={likeOrDislikeHandler}
-              size={"24"}
-              className="cursor-pointer text-red-600"
-            />
-          ) : (
-            <FaRegHeart
-              onClick={likeOrDislikeHandler}
-              size={"22px"}
+
+      <div className="p-3 flex flex-col gap-2">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            {liked ? (
+              <FaHeart
+                onClick={likeOrDislikeHandler}
+                size={"24"}
+                className="cursor-pointer text-red-600"
+              />
+            ) : (
+              <FaRegHeart
+                onClick={likeOrDislikeHandler}
+                size={"22px"}
+                className="cursor-pointer hover:text-gray-600"
+              />
+            )}
+
+            <MessageCircle
+              onClick={() => {
+                dispatch(setSelectedPost(post));
+                setOpen(true);
+              }}
               className="cursor-pointer hover:text-gray-600"
             />
-          )}
+            {/* <Send className="cursor-pointer hover:text-gray-600" /> */}
+          </div>
+          <button onClick={bookmarkHandler}>
+            {bookmarked ? (
+              <BookmarkSolid className="w-6 h-6  text-black " />
+            ) : (
+              <BookmarkOutline className="w-6 h-6 text-black " />
+            )}
+          </button>
+        </div>
 
-          {/* icon taken by react-icons for using this 1st i it by "npm i react-icons" */}
-          <MessageCircle
+        <span className="font-medium block mb-2 text-sm md:text-base">{postLike} likes</span>
+        <p className="text-sm break-words">
+          <span className="font-medium mr-2">{post.author?.username}</span>
+          {post.caption}
+        </p>
+        {comment.length > 0 && (
+          <span
             onClick={() => {
               dispatch(setSelectedPost(post));
               setOpen(true);
             }}
-            className="cursor-pointer hover:text-gray-600"
-          />
-          {/* <Send className="cursor-pointer hover:text-gray-600" /> */}
-        </div>
-        <button onClick={bookmarkHandler}>
-          {bookmarked ? (
-            <BookmarkSolid className="w-6 h-6  text-black " />
-          ) : (
-            <BookmarkOutline className="w-6 h-6 text-black " />
-          )}
-        </button>
-      </div>
-
-      <span className="font-medium block mb-2">{postLike} likes</span>
-      <p>
-        <span className="font-medium mr-2">{post.author?.username}</span>
-        {post.caption}
-      </p>
-      {comment.length > 0 && (
-        <span
-          onClick={() => {
-            dispatch(setSelectedPost(post));
-            setOpen(true);
-          }}
-          className="cursor-pointer text-sm text-gray-400"
-        >
-          View all {comment.length} comments
-        </span>
-      )}
-      <CommentDialog open={open} setOpen={setOpen} />
-
-      <div className="flex items-center justify-between">
-        <input
-          type="text"
-          placeholder="Add a comment..."
-          value={text}
-          onChange={changeEventHandler}
-          className="outline-none text-sm w-full"
-        />
-        {text && (
-          <span
-            onClick={commentHandler}
-            className="text-[#3BADF8] cursor-pointer"
+            className="cursor-pointer text-xs md:text-sm text-gray-400"
           >
-            Post
+            View all {comment.length} comments
           </span>
         )}
+        <CommentDialog open={open} setOpen={setOpen} />
+
+        <div className="flex items-center justify-between mt-2">
+          <input
+            type="text"
+            placeholder="Add a comment..."
+            value={text}
+            onChange={changeEventHandler}
+            className="outline-none text-xs md:text-sm w-full"
+          />
+          {text && (
+            <span
+              onClick={commentHandler}
+              className="text-[#3BADF8] cursor-pointer text-xs md:text-base"
+            >
+              Post
+            </span>
+          )}
+        </div>
       </div>
     </div>
   );
