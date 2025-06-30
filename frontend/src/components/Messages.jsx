@@ -13,7 +13,7 @@ const Messages = ({ selectedUser }) => {
     const {messages} = useSelector(store=>store.chat);
     const {user} = useSelector(store=>store.auth);
     return (    
-        <div className='overflow-y-auto flex-1 p-4'>
+        <div className='overflow-y-auto flex-1 p-4 hide-scrollbar'>
             <div className='flex justify-center'>
                 <div className='flex flex-col items-center justify-center'>
                     <Avatar className="h-20 w-20">
@@ -24,7 +24,7 @@ const Messages = ({ selectedUser }) => {
                     <Link to={`/profile/${selectedUser?._id}`}><Button className="h-8 my-2 cursor-pointer" variant="secondary">View profile</Button></Link>
                 </div>
             </div>
-            <div className='flex flex-col gap-3'>
+            <div className='flex flex-col gap-3 '>
                 {
                    messages && messages.map((msg) => {
                         return (

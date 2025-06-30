@@ -58,7 +58,7 @@ const ChatPage = () => {
                     </div>
                     <h1 className="font-bold mb-4 px-3 text-xl">{user?.username}</h1>
                     <hr className="mb-4 border-gray-300" />
-                    <div className="overflow-y-auto h-[77vh] md:h-[87vh]">
+                    <div className="overflow-y-auto h-[77vh] md:h-[87vh] hide-scrollbar">
                         {suggestedUsers.map((suggestedUser) => {
                             if (!suggestedUser?._id) return null;
                             const isOnline = onlineUsers.includes(suggestedUser?._id);
@@ -110,6 +110,11 @@ const ChatPage = () => {
                                 <Input
                                     value={textMessage}
                                     onChange={(e) => setTextMessage(e.target.value)}
+                                    onKeyDown={(e) => {
+                                        if (e.key === "Enter") {
+                                            sendMessageHandler(selectedUser?._id);
+                                        }
+                                    }}
                                     type="text"
                                     className="flex-1 mr-2 focus-visible:ring-transparent"
                                     placeholder="Messages..."
@@ -120,7 +125,7 @@ const ChatPage = () => {
                             </div>
                         </section>
                     ) : (
-                        <div className="flex flex-col items-center justify-center min-h-screen text-center">
+                        <div className="flex flex-col border-l items-center justify-center min-h-screen text-center">
                             <MessageCircleCode className="w-32 h-32 my-4" />
                             <h1 className="font-medium text-lg">Your messages</h1>
                             <span className="text-sm text-gray-600">

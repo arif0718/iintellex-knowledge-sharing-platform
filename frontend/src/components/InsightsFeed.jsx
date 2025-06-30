@@ -19,11 +19,11 @@ const InsightsFeed = () => {
         <LeftSidebar />
       </div>
       
-      <div className="columns-2 xs:columns-2 md:columns-3 lg:columns-4 gap-1 md:gap-4 space-y-4 overflow-y-scroll hide-scrollbar">
+      <div className="columns-2 xs:columns-2 md:columns-3 lg:columns-4 gap-1 md:gap-4 space-y-4 ">
         {posts.map((post) => (
           <div
             key={post._id}
-            className="break-inside-avoid mb-2 md:mb-4 bg-white shadow-md rounded-lg overflow-hidden"
+            className="break-inside-avoid mb-2 md:mb-4 bg-white shadow-md rounded-lg "
           >
             {post.image && (
               <img
