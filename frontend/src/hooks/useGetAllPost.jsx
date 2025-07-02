@@ -1,5 +1,5 @@
 import { setPosts } from "@/redux/postSlice";
-import axios from "axios";
+import axios from "@/axios"; // ✅ use your custom instance
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 
@@ -9,10 +9,7 @@ const useGetAllPost = () => {
   useEffect(() => {
     const fetchAllPost = async () => {
       try {
-        
-        const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/v1/post/all`, {
-          withCredentials: true,
-        });
+        const res = await axios.get("/api/v1/post/all"); // ✅ no need for full URL
         if (res.data.success) {
           dispatch(setPosts(res.data.posts));
         }
