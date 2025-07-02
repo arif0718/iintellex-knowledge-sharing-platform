@@ -1,5 +1,5 @@
 import { setPosts } from "@/redux/postSlice";
-import axios from "@/axios"; // ✅ use your custom instance
+import axios from "../axios.js"; // ✅ use your custom instance
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 
