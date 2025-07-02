@@ -11,7 +11,6 @@ import { toast } from "sonner";
 import Comment from "./Comment";
 
 const CommentDialog = ({ open, setOpen }) => {
-  //use for input text in dialog box
   const [text, setText] = useState("");
   const { user } = useSelector((store) => store.auth);
   const { selectedPost, posts } = useSelector((store) => store.post);
@@ -25,7 +24,6 @@ const CommentDialog = ({ open, setOpen }) => {
     }
   }, [selectedPost]);
 
-  //after writing the comment check comment is there or not then set the text
   const changeEventHandler = (e) => {
     const inputText = e.target.value;
     if (inputText.trim()) {
@@ -54,7 +52,6 @@ const CommentDialog = ({ open, setOpen }) => {
     }
   };
 
-  //used for interecting with backend for input comment
   const sendMessageHandler = async () => {
     try {
       const res = await axios.post(
@@ -88,18 +85,18 @@ const CommentDialog = ({ open, setOpen }) => {
     <Dialog open={open}>
       <DialogContent
         onInteractOutside={() => setOpen(false)}
-        className="min-w-5xl p-0 flex flex-col"
+        className="p-0 flex flex-col max-w-full w-full sm:max-w-2xl md:min-w-[700px] md:max-w-4xl"
       >
-        <div className="flex flex-1">
-          <div className="w-1/2">
+        <div className="flex flex-col md:flex-row flex-1 ">
+          <div className="w-full md:w-1/2 max-h-72 md:max-h-none">
             <img
               src={selectedPost?.image}
               alt="post_img"
-              className="w-full h-full object-cover rounded-l-lg"
+              className="w-full h-60 md:h-full object-cover rounded-t-lg md:rounded-l-lg md:rounded-tr-none"
             />
           </div>
-          <div className="w-1/2 flex flex-col justify-between">
-            <div className="flex items-center justify-between p-4">
+          <div className="w-full md:w-1/2 flex flex-col justify-between">
+            <div className="flex items-center justify-between p-4 bg-gradient-to-r from-[#f0e4e4] to-[#bdd6f2] border-b border-gray-300">
               <div className="flex gap-3 items-center">
                 <Link>
                   <Avatar>
@@ -107,15 +104,12 @@ const CommentDialog = ({ open, setOpen }) => {
                     <AvatarFallback><UserRound /></AvatarFallback>
                   </Avatar>
                 </Link>
-
                 <div>
                   <Link className="font-semibold text-xs ">
                     {selectedPost?.author?.username}{" "}
                   </Link>
-                  {/* <span className="text-gray-600 text-sm">Bio here...</span> */}
                 </div>
               </div>
-
               <Dialog>
                 <DialogTrigger asChild>
                   <MoreHorizontal className="cursor-pointer" />
@@ -129,7 +123,6 @@ const CommentDialog = ({ open, setOpen }) => {
                       Unfollow
                     </Button>
                   )}
-
                   <Button variant="ghost" className="cursor-pointer w-fit ">
                     Add to favorites
                   </Button>
@@ -145,21 +138,30 @@ const CommentDialog = ({ open, setOpen }) => {
                 </DialogContent>
               </Dialog>
             </div>
-            <hr />
-
-            {/* for comments */}
-            <div className="flex-1 overflow-y-auto max-h-96 p-4">
-              {
-                comment.map((comment) => <Comment key={comment._id} comment={comment} />)
-              }
+            {/* Comments */}
+            <div className="flex-1 overflow-y-auto max-h-40 md:max-h-96 p-4">
+              {comment.map((comment) => (
+                <Comment key={comment._id} comment={comment} />
+              ))}
             </div>
-            <hr />
-
-            {/* input space div*/}
-            <div className='p-4'>
-              <div className='flex items-center gap-2'>
-                <input type="text" value={text} onChange={changeEventHandler} placeholder='Add a comment...' className='w-full outline-none border text-sm border-gray-300 p-2 rounded' />
-                <Button disabled={!text.trim()} onClick={sendMessageHandler} variant="outline">Send</Button>
+            {/* Input */}
+            <div className="border-t border-gray-300 p-4 bg-gradient-to-r from-[#f0e4e4] to-[#bdd6f2]">
+              <div className="flex items-center gap-2">
+                <input
+                  type="text"
+                  value={text}
+                  onChange={changeEventHandler}
+                  placeholder="Add a comment..."
+                  className="w-full outline-none border text-sm border-gray-300 p-2 rounded-md bg-white"
+                />
+                <Button
+                  disabled={!text.trim()}
+                  onClick={sendMessageHandler}
+                  variant="outline"
+                  className="cursor-pointer bg-[#101e50] text-white hover:bg-gray-400 hover:text-black"
+                >
+                  Send
+                </Button>
               </div>
             </div>
           </div>
