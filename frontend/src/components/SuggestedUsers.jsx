@@ -53,7 +53,7 @@ const SuggestedUsers = () => {
                 {/* <span className="font-medium cursor-pointer">See All</span> */}
             </div>
             {
-                suggestedUsers.slice(0, 7).map((user) => {
+                suggestedUsers.filter(u => !u.followers?.includes(user._id)).slice(0, 7).map((user) => {
                     const isFollowed = followedMap[user._id];
                     const isLoading = loadingMap[user._id];
                     return (

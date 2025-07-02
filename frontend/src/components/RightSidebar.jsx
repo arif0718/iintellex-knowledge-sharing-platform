@@ -8,7 +8,7 @@ import { UserRound } from 'lucide-react';
 const RightSidebar = () => {
   const { user } = useSelector(store => store.auth);
   return (
-    <div className="hidden md:block w-fit my-10 px-5 pr-15 ">
+    <div className="hidden md:block max-w-[360px] min-w-[250px] w-full my-10 px-5 pr-10 ">
       <div className='flex items-center gap-2'>
         <Link to={`/profile/${user?._id}`}>
           <Avatar className="w-10 h-10">
