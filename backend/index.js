@@ -15,13 +15,6 @@ const PORT = process.env.PORT||3000;
 
 const __dirname = path.resolve();
 
-// app.get("/", (req,res)=>{
-//     return res.status(200).json({
-//         message:"I'm from backend",
-//         success:true
-//     })
-// })
-
 //middlewares
 app.use(express.json());
 app.use(cookieParser());
@@ -36,12 +29,6 @@ app.use(cors(corsOptions));
 app.use("/api/v1/user", userRoute);                //"http://localhost:8000/api/v1/user"
 app.use("/api/v1/post", postRoute);  
 app.use("/api/v1/message", messageRoute);
-
-//connecting backend+frontend for production level
-app.use(express.static(path.join(__dirname, "/frontend/dist")));
-app.get("*", (req,res)=>{
-    res.sendFile(path.resolve(__dirname, "frontend", "dist", "index.html"));
-})
 
 server.listen(PORT, ()=>{
     connectDB();
