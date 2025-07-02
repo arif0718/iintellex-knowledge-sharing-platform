@@ -2,7 +2,6 @@ import axios from "axios";
 
 const isRealEmail = async (email) => {
   try {
-    const apiKey = "89a5393decb641e38ca9001aa6da3c89";
     const url = `https://emailvalidation.abstractapi.com/v1/?api_key=${process.env.EMAIL_VALIDATION_API_KEY}&email=${email}`;
 
     const { data } = await axios.get(url);
