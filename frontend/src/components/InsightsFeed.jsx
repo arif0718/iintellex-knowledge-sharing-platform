@@ -8,7 +8,7 @@ const InsightsFeed = () => {
   const { posts } = useSelector((store) => store.post);
 
   return (
-    <div className="pl-[2%] pr-[2%] md:pl-[19%] md:pr-2 pt-8 min-h-screen bg-gray-50 ">
+    <div className="pl-[2%] pr-[2%] md:pl-[19%] md:pr-2 pt-8 min-h-screen bg-gray-50 bg-gradient-to-r from-[#f0e4e4] to-[#bdd6f2]">
 
       <div className="md:hidden flex">
         <div className="md:hidden flex items-center justify-between w-full px-4 ">

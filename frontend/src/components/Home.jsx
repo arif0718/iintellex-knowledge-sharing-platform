@@ -9,7 +9,7 @@ const Home = () => {
   useGetAllPost();
   useGetSuggestedUsers();
   return (
-    <div className='flex overflow-y-scroll hide-scrollbar h-screen '>
+    <div className='flex overflow-y-scroll hide-scrollbar h-screen bg-gradient-to-r from-[#f0e4e4] to-[#bdd6f2]'>
       <div className='flex-grow '>
         <Feed/>
         <Outlet/>

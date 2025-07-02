@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux'
 const Posts = () => {
   const {posts} = useSelector(store=>store.post);
   return (
-    <div>
+    <div className='px-1'>
         {
             [...posts].reverse().map((post) => <Post key={post._id} post={post}/>)
         }

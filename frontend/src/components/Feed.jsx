@@ -106,7 +106,6 @@ const Feed = () => {
         )}
       </div>
 
-      {/* Posts below */}
       <div
         className={`${searchResults.length > 0 ? "opacity-30 pointer-events-none" : ""
           }`}

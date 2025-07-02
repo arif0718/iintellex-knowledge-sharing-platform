@@ -19,7 +19,6 @@ const ChatPage = () => {
 
     const sendMessageHandler = async (receiverId) => {
         try {
-            // http://localhost:8000/ => http://localhost:8000/ 
             const res = await axios.post(`http://localhost:8000/api/v1/message/send/${receiverId}`, { textMessage }, {
                 headers: {
                     'Content-Type': 'application/json'
@@ -56,8 +55,7 @@ const ChatPage = () => {
     }, []);
 
     return (
-        <div>
-            <div className="flex ml-0 md:ml-[18%] h-screen">
+            <div className="flex ml-0 md:ml-[18%] h-screen bg-gradient-to-r from-[#f0e4e4] to-[#bdd6f2]">
                 {/* Sidebar: Only show on desktop or if no user selected on mobile */}
                 <section
                     className={`w-full md:w-1/4 mt-8 h-[80vh] ${selectedUser ? 'hidden md:block' : 'block'}`}
@@ -72,7 +70,7 @@ const ChatPage = () => {
                         <LeftSidebar />
                     </div>
                     <h1 className="font-bold mb-4 px-3 text-xl ">{user?.username}</h1>
-                    <hr className="mb-4 border-gray-300" />
+                    <hr className="mb-4 border border-gray-300 shadow-md" />
                     <div className="overflow-y-auto h-[77vh] md:h-[87vh] hide-scrollbar  ">
                        {involvedUser && involvedUser.map((msg) => {
 
@@ -83,7 +81,7 @@ const ChatPage = () => {
                                 <div
                                     key={chatUserData._id}
                                     onClick={() => dispatch(setSelectedUser(chatUserData))}
-                                    className="flex gap-3 rounded-lg m-4 items-center p-1 shadow-md hover:bg-gray-200 cursor-pointer"
+                                    className="flex gap-3 rounded-lg m-4 items-center p-1 bg-gray-200 shadow-md hover:bg-[#d4dfea] cursor-pointer"
                                 >
                                     <Avatar className="w-14 h-14">
                                         <AvatarImage src={chatUserData.profilePicture} />
@@ -109,19 +107,19 @@ const ChatPage = () => {
                 >
                     {selectedUser ? (
                         <section className="flex-1 border-l border-l-gray-300 flex flex-col h-full">
-                            <div className="flex gap-3 items-center px-3 py-2 border-b border-gray-300 sticky top-0 bg-white z-10">
+                            <div className="flex gap-3 items-center px-3 py-2 border-b border-gray-300 sticky shadow-sm">
                                 <Avatar>
                                     <AvatarImage src={selectedUser?.profilePicture} alt="profile" />
                                     <AvatarFallback>
                                         <UserRound />
                                     </AvatarFallback>
                                 </Avatar>
-                                <div className="flex flex-col">
+                                <div className="flex flex-col font-bold">
                                     <span>{selectedUser?.username}</span>
                                 </div>
                             </div>
                             <Messages selectedUser={selectedUser} />
-                            <div className="flex items-center p-4 border-t border-t-gray-300">
+                            <div className="flex items-center p-4 border-t border-t-[#b9c0cc] ">
                                 <Input
                                     value={textMessage}
                                     onChange={(e) => setTextMessage(e.target.value)}
@@ -131,7 +129,7 @@ const ChatPage = () => {
                                         }
                                     }}
                                     type="text"
-                                    className="flex-1 mr-2 focus-visible:ring-transparent"
+                                    className="flex-1 mr-2 focus-visible:ring-transparent shadow-lg "
                                     placeholder="Messages..."
                                 />
                                 <Button onClick={() => sendMessageHandler(selectedUser?._id)}>
@@ -140,17 +138,16 @@ const ChatPage = () => {
                             </div>
                         </section>
                     ) : (
-                        <div className="flex flex-col border-l items-center justify-center min-h-screen text-center">
+                        <div className="flex flex-col border-l border-l-gray-300 shadow-md items-center justify-center min-h-screen text-center">
                             <MessageCircleCode className="w-32 h-32 my-4" />
-                            <h1 className="font-medium text-lg">Your messages</h1>
+                            <h1 className="font-medium text-lg">Conversations</h1>
                             <span className="text-sm text-gray-600">
-                                Send a message to start a chat.
+                                Send your first message and spark a conversation.
                             </span>
                         </div>
                     )}
                 </div>
             </div>
-        </div>
     );
 }
 

@@ -11,11 +11,9 @@ import { setUserProfile } from "@/redux/authSlice";
 const SuggestedUsers = () => {
     const { suggestedUsers, user } = useSelector(store => store.auth);
     const dispatch = useDispatch();
-    // Track follow state and loading for each user
     const [followedMap, setFollowedMap] = useState({});
     const [loadingMap, setLoadingMap] = useState({});
 
-    // Keep followedMap in sync with suggestedUsers and user
     React.useEffect(() => {
         const map = {};
         suggestedUsers.forEach(u => {
@@ -37,8 +35,7 @@ const SuggestedUsers = () => {
                     ...prev,
                     [suggestedUser._id]: !prev[suggestedUser._id]
                 }));
-                // Optionally update Redux userProfile if needed
-                // dispatch(setUserProfile(...))
+
                 toast.success(res.data.message);
             }
         } catch (error) {
@@ -63,7 +60,7 @@ const SuggestedUsers = () => {
                         <div key={user._id} className='flex items-center justify-between gap-10 my-5'>
                             <div className='flex items-center gap-2'>
                                 <Link to={`/profile/${user?._id}`}>
-                                    <Avatar>
+                                    <Avatar className="w-10 h-10">
                                         <AvatarImage src={user?.profilePicture} alt="post_image" />
                                         <AvatarFallback><UserRound /></AvatarFallback>
                                     </Avatar>

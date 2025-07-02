@@ -11,7 +11,7 @@ const RightSidebar = () => {
     <div className="hidden md:block w-fit my-10 px-5 pr-15 ">
       <div className='flex items-center gap-2'>
         <Link to={`/profile/${user?._id}`}>
-          <Avatar>
+          <Avatar className="w-10 h-10">
             <AvatarImage src={user?.profilePicture} alt="post_image" />
             <AvatarFallback><UserRound /></AvatarFallback>
           </Avatar>

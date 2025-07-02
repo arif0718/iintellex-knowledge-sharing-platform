@@ -77,7 +77,7 @@ const LeftSidebar = () => {
     { icon: <Upload />, text: "Upload" },
     {
       icon: (
-        <Avatar className="w-7 h-7 ">
+        <Avatar className="w-8 h-8 ">
           <AvatarImage src={user?.profilePicture} alt="@user" />
           <AvatarFallback><UserRound /></AvatarFallback>
         </Avatar>
@@ -147,11 +147,11 @@ const LeftSidebar = () => {
                     </Button>
                   </PopoverTrigger>
                   <PopoverContent>
-                    <div>
+                    <div className="">
                       {likeNotification.map((notification) => (
                         <div
                           key={notification.userId}
-                          className="flex items-center gap-2 my-2"
+                          className="flex items-center gap-2"
                         >
                           <Avatar>
                             <AvatarImage

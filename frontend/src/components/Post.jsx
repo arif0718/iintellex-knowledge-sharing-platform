@@ -137,8 +137,8 @@ const Post = ({ post }) => {
   };
 
   return (
-    <div className="break-inside-avoid md:my-4 bg-white shadow-md rounded-lg overflow-hidden flex flex-col">
-      <div className="flex items-center justify-between p-3 pb-0">
+    <div className="break-inside-avoid md:my-4 bg-white shadow-md rounded-lg overflow-hidden flex flex-col mb-2">
+      <div className="flex items-center justify-between p-3">
         <div className="flex items-center gap-2">
           <Avatar>
             <AvatarImage src={post.author?.profilePicture} alt="post-image" />
