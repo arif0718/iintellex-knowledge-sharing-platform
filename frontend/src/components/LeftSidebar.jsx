@@ -123,7 +123,7 @@ const LeftSidebar = () => {
             <div
               onClick={() => sidebarHandler(item.text)}
               key={index}
-              className="flex items-center gap-3 relative hover:bg-gray-100 cursor-pointer rounded-lg p-3 my-2"
+              className="flex items-center gap-3 relative hover:bg-gray-200 cursor-pointer rounded-lg p-3 my-2"
             >
               {item.icon}
               <span>{item.text}</span>

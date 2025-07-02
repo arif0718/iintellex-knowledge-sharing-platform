@@ -12,6 +12,7 @@ import LeftSidebar from './LeftSidebar';
 
 const ChatPage = () => {
     const [textMessage, setTextMessage] = useState("");
+    const [involvedUser, setInvolvedUser] = useState([]);
     const { user, suggestedUsers, selectedUser } = useSelector(store => store.auth);
     const { onlineUsers, messages } = useSelector(store => store.chat);
     const dispatch = useDispatch();
@@ -34,7 +35,21 @@ const ChatPage = () => {
         }
     }
 
+    const conversationUsers = async () => {
+        try {            
+            const res = await axios.get(`http://localhost:8000/api/v1/message/conversations/${user._id}`, {withCredentials: true});
+            if(res.data.success){
+                setInvolvedUser(res.data.results);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+
     useEffect(() => {
+        conversationUsers()
+        
         return () => {
             dispatch(setSelectedUser(null));
         }
@@ -56,35 +71,35 @@ const ChatPage = () => {
                         </div>
                         <LeftSidebar />
                     </div>
-                    <h1 className="font-bold mb-4 px-3 text-xl">{user?.username}</h1>
+                    <h1 className="font-bold mb-4 px-3 text-xl ">{user?.username}</h1>
                     <hr className="mb-4 border-gray-300" />
-                    <div className="overflow-y-auto h-[77vh] md:h-[87vh] hide-scrollbar">
-                        {suggestedUsers.map((suggestedUser) => {
-                            if (!suggestedUser?._id) return null;
-                            const isOnline = onlineUsers.includes(suggestedUser?._id);
+                    <div className="overflow-y-auto h-[77vh] md:h-[87vh] hide-scrollbar  ">
+                       {involvedUser && involvedUser.map((msg) => {
+
+                            const chatUserData = suggestedUsers.find((u) => u._id === msg);
+                            const isOnline = onlineUsers.includes(chatUserData?._id);
+
                             return (
                                 <div
-                                    key={suggestedUser._id}
-                                    onClick={() => dispatch(setSelectedUser(suggestedUser))}
-                                    className="flex gap-3 border-2 rounded-lg m-4 items-center p-1 hover:bg-gray-200 cursor-pointer"
+                                    key={chatUserData._id}
+                                    onClick={() => dispatch(setSelectedUser(chatUserData))}
+                                    className="flex gap-3 rounded-lg m-4 items-center p-1 shadow-md hover:bg-gray-200 cursor-pointer"
                                 >
                                     <Avatar className="w-14 h-14">
-                                        <AvatarImage src={suggestedUser?.profilePicture} />
-                                        <AvatarFallback>
-                                            <UserRound />
-                                        </AvatarFallback>
+                                        <AvatarImage src={chatUserData.profilePicture} />
+                                        <AvatarFallback><UserRound /></AvatarFallback>
                                     </Avatar>
                                     <div className="flex flex-col">
-                                        <span className="font-medium">{suggestedUser?.username}</span>
-                                        <span
-                                            className={`text-xs font-bold ${isOnline ? 'text-green-600' : 'text-red-600'}`}
-                                        >
+                                        <span className="font-medium">{chatUserData.username}</span>
+                                        <span className={`text-xs font-bold ${isOnline ? 'text-green-600' : 'text-red-600'}`}>
                                             {isOnline ? 'online' : 'offline'}
                                         </span>
                                     </div>
                                 </div>
                             );
                         })}
+
+
                     </div>
                 </section>
 

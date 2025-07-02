@@ -9,7 +9,6 @@ const useGetAllPost = () => {
   useEffect(() => {
     const fetchAllPost = async () => {
       try {
-        console.log(import.meta.env.VITE_API_URL);
         
         const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/v1/post/all`, {
           withCredentials: true,

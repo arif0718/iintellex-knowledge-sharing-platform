@@ -55,3 +55,22 @@ export const getMessage = async (req,res) => {
         console.log(error);
     }
 }
+
+export const getConversationUsers = async (req, res) => {
+    try {
+        const userId = req.params.id;
+        const conversationUsers = await Conversation.find({participants:{$in:userId}});
+
+        const involedUsers = conversationUsers.filter((con)=> con.messages.length != 0);
+
+        const results = involedUsers.map((u) => {
+            return u.participants[0] != userId ? u.participants[0] : u.participants[1]  
+        })
+
+        res.status(200).json({
+            success:true, results})
+
+    } catch (error) {
+        console.log(error);
+    }
+}
