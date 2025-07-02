@@ -32,7 +32,7 @@ const Feed = () => {
 
         try {
           const res = await axios.get(
-            `http://localhost:8000/api/v1/user/search?q=${search}`,
+            `${import.meta.env.VITE_API_URL}/api/v1/user/search?q=${search}`,
             { withCredentials: true }
           );
           if (res.data.success) {

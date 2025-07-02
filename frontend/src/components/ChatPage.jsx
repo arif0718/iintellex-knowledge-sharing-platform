@@ -19,7 +19,7 @@ const ChatPage = () => {
 
     const sendMessageHandler = async (receiverId) => {
         try {
-            const res = await axios.post(`http://localhost:8000/api/v1/message/send/${receiverId}`, { textMessage }, {
+            const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/v1/message/send/${receiverId}`, { textMessage }, {
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -36,7 +36,7 @@ const ChatPage = () => {
 
     const conversationUsers = async () => {
         try {            
-            const res = await axios.get(`http://localhost:8000/api/v1/message/conversations/${user._id}`, {withCredentials: true});
+            const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/v1/message/conversations/${user._id}`, {withCredentials: true});
             if(res.data.success){
                 setInvolvedUser(res.data.results);
             }

@@ -38,7 +38,7 @@ const Profile = () => {
   const followUnfollowHandler = async () => {
     try {
       const res = await axios.post(
-        `http://localhost:8000/api/v1/user/followorunfollow/${userProfile?._id}`,
+        `${import.meta.env.VITE_API_URL}/api/v1/user/followorunfollow/${userProfile?._id}`,
         {},
         { withCredentials: true }
       );
@@ -67,7 +67,7 @@ const Profile = () => {
   const startConversation = async () => {
     try {
       const res = await axios.post(
-        `http://localhost:8000/api/v1/message/send/${userProfile?._id}`,
+        `${import.meta.env.VITE_API_URL}/api/v1/message/send/${userProfile?._id}`,
         { textMessage: "__start__" }, // default message
         { withCredentials: true }
       );

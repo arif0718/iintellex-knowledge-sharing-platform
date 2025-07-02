@@ -28,7 +28,7 @@ const Signup = () => {
     try {
       setLoading(true);
       const res = await axios.post(
-        "http://localhost:8000/api/v1/user/register",
+        `${import.meta.env.VITE_API_URL}/api/v1/user/register`,
         input,
         {
           headers: {
@@ -75,7 +75,7 @@ const Signup = () => {
           </p>
         </div>
         <div>
-          <Label className="font-medium">Username</Label>
+          <Label className="font-medium">Full Name</Label> {/*  username */}
           <Input
             type="text"
             name="username"
