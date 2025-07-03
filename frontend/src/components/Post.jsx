@@ -12,6 +12,7 @@ import { toast } from "sonner";
 import axios from "axios";
 import { setPosts, setSelectedPost } from "@/redux/postSlice";
 import { Badge } from "./ui/badge";
+import { Link } from "react-router-dom";
 
 const Post = ({ post }) => {
   const [text, setText] = useState("");
@@ -140,16 +141,22 @@ const Post = ({ post }) => {
     <div className="break-inside-avoid md:my-4 bg-white shadow-md rounded-lg overflow-hidden flex flex-col mb-2">
       <div className="flex items-center justify-between p-3">
         <div className="flex items-center gap-2">
-          <Avatar>
-            <AvatarImage src={post.author?.profilePicture} alt="post-image" />
-            <AvatarFallback><UserRound /></AvatarFallback>
-          </Avatar>
-          <div className="flex items-center gap-3">
-            <h1 className="text-sm font-semibold">{post.author?.username}</h1>
-            {user?._id === post.author._id && (
-              <Badge variant="secondary">Author</Badge>
-            )}
-          </div>
+          <Link
+            key={post.author?._id}
+            to={`/profile/${post.author?._id}`}
+            className="flex items-center gap-3 rounded-md"
+          >
+            <Avatar>
+              <AvatarImage src={post.author?.profilePicture} alt="post-image" />
+              <AvatarFallback><UserRound /></AvatarFallback>
+            </Avatar>
+            <div className="flex items-center gap-3">
+              <h1 className="text-sm font-semibold">{post.author?.username}</h1>
+              {user?._id === post.author._id && (
+                <Badge variant="secondary">Author</Badge>
+              )}
+            </div>
+          </Link>
         </div>
         <Dialog>
           <DialogTrigger asChild>
@@ -165,9 +172,9 @@ const Post = ({ post }) => {
               </Button>
             )}
 
-            <Button variant="ghost" className="cursor-pointer w-fit">
+            {/* <Button variant="ghost" className="cursor-pointer w-fit">
               Add to favorites
-            </Button>
+            </Button> */}
             {user && user?._id == post?.author._id && (
               <Button
                 onClick={deleteHandler}
