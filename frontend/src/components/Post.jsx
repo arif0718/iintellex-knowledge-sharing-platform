@@ -172,9 +172,9 @@ const Post = ({ post }) => {
               </Button>
             )}
 
-            {/* <Button variant="ghost" className="cursor-pointer w-fit">
+            <Button variant="ghost" className="cursor-pointer w-fit">
               Add to favorites
-            </Button> */}
+            </Button>
             {user && user?._id == post?.author._id && (
               <Button
                 onClick={deleteHandler}
