@@ -231,7 +231,7 @@ const Post = ({ post }) => {
         </div>
 
         <span className="font-medium block mb-2 text-sm md:text-base">{postLike} likes</span>
-        <p className="text-sm break-words">
+        <p className="text-sm break-words max-w-[400px]">
           <span className="font-medium mr-2">{post.author?.username}</span>
           {post.caption}
         </p>
