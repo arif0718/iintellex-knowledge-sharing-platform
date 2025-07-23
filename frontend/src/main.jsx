@@ -8,6 +8,18 @@ import store from './redux/store.js'
 import { PersistGate } from "redux-persist/integration/react";
 import { persistStore } from 'redux-persist'
 import { GoogleOAuthProvider } from '@react-oauth/google';
+import { registerSW } from 'virtual:pwa-register';
+
+const updateSW = registerSW({
+  onNeedRefresh() {
+    if (confirm("New content available. Reload?")) {
+      updateSW(true);
+    }
+  },
+  onOfflineReady() {
+    console.log("App is ready to work offline.");
+  }
+});
 
 let persistor = persistStore(store)
 
